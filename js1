@@ -1,0 +1,26 @@
+function caesarCipher(text, rotationFactor) {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const uppercaseAlphabet = alphabet.toUpperCase();
+  
+  const encryptedText = text.split('').map(char => {
+    if (/[a-zA-Z]/.test(char)) {
+      const isUppercase = char === char.toUpperCase();
+      const charSet = isUppercase ? uppercaseAlphabet : alphabet;
+      
+      const currentIndex = charSet.indexOf(char);
+      const newIndex = (currentIndex + rotationFactor) % charSet.length;
+      const newChar = charSet[newIndex];
+      
+      return isUppercase ? newChar.toUpperCase() : newChar;
+    } else {
+      return char;
+    }
+  }).join('');
+
+  return encryptedText;
+}
+
+// Exemples d'utilisation
+console.log(caesarCipher("middle-Outz", 2)); // "okffng-Qwvb"
+console.log(caesarCipher("Always-Look-on-the-Bright-Side-of-Life", 5)); // "Fqbfdx-Qttp-ts-ymj-Gwnlmy-Xnij-tk-Qnkj"
+console.log(caesarCipher("A friend in need is a friend indeed", 20)); // "U zlcyhx ch hyyx cm u zlcyhx chxyyx"
